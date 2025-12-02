@@ -31,7 +31,7 @@ export function RadarChart({ scores, isHighDistortion = false }: RadarChartProps
   const chartColor = isHighDistortion ? "#DC2626" : "#3D5AFE"; // red-600 : blue
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width={160} height={160}>
       <RechartsRadarChart data={data}>
         <PolarGrid stroke="#E0E0E0" />
         <PolarAngleAxis
