@@ -1,0 +1,49 @@
+/* Content Script Styles - 페이지에 주입되는 인용문 하이라이트 스타일 */
+
+.quote-highlight {
+  position: relative;
+  display: inline;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 2px;
+  padding: 1px 2px;
+}
+
+/* 하이라이트 표시 */
+.quote-highlight-visible {
+  background-color: var(--highlight-yellow, #FFF8B5);
+}
+
+/* 호버 효과 */
+.quote-highlight-visible:hover,
+.quote-highlight-visible.quote-highlight-hover {
+  background-color: var(--highlight-yellow-hover, #FEF08A);
+}
+
+/* 하이라이트 안 된 인용문에 호버 시 */
+.quote-highlight:not(.quote-highlight-visible):hover {
+  background-color: var(--highlight-yellow, #FFF8B5);
+}
+
+/* 각주 번호 */
+.quote-number {
+  font-size: 10px;
+  color: #000000;
+  margin-left: 2px;
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* 애니메이션 */
+@keyframes highlightPulse {
+  0%, 100% {
+    background-color: var(--highlight-yellow, #FFF8B5);
+  }
+  50% {
+    background-color: var(--highlight-yellow-hover, #FEF08A);
+  }
+}
+
+.quote-highlight-pulse {
+  animation: highlightPulse 1s ease-in-out;
+}

@@ -338,6 +338,59 @@
     }
   }
 
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) p {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) label, :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    * {
+      outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -1085,6 +1138,49 @@
   }
 }
 
+.quote-highlight {
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 1px 2px;
+  transition: background-color .2s;
+  display: inline;
+  position: relative;
+}
+
+.quote-highlight-visible {
+  background-color: var(--highlight-yellow, #fff8b5);
+}
+
+.quote-highlight-visible:hover, .quote-highlight-visible.quote-highlight-hover {
+  background-color: var(--highlight-yellow-hover, #fef08a);
+}
+
+.quote-highlight:not(.quote-highlight-visible):hover {
+  background-color: var(--highlight-yellow, #fff8b5);
+}
+
+.quote-number {
+  color: #000;
+  vertical-align: super;
+  margin-left: 2px;
+  font-size: 10px;
+  line-height: 0;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    background-color: var(--highlight-yellow, #fff8b5);
+  }
+
+  50% {
+    background-color: var(--highlight-yellow-hover, #fef08a);
+  }
+}
+
+.quote-highlight-pulse {
+  animation: 1s ease-in-out highlightPulse;
+}
+
 :root {
   --font-size: 16px;
   --background: #fff;
@@ -1124,6 +1220,57 @@
   --sidebar-accent-foreground: oklch(.205 0 0);
   --sidebar-border: oklch(.922 0 0);
   --sidebar-ring: oklch(.708 0 0);
+}
+
+:root {
+  --font-size: 16px;
+  --background: #fff;
+  --foreground: oklch(.145 0 0);
+  --card: #fff;
+  --card-foreground: oklch(.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(.95 .0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #fff;
+  --border: #0000001a;
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(.708 0 0);
+  --chart-1: oklch(.646 .222 41.116);
+  --chart-2: oklch(.6 .118 184.704);
+  --chart-3: oklch(.398 .07 227.392);
+  --chart-4: oklch(.828 .189 84.429);
+  --chart-5: oklch(.769 .188 70.08);
+  --radius: .625rem;
+  --sidebar: oklch(.985 0 0);
+  --sidebar-foreground: oklch(.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(.985 0 0);
+  --sidebar-accent: oklch(.97 0 0);
+  --sidebar-accent-foreground: oklch(.205 0 0);
+  --sidebar-border: oklch(.922 0 0);
+  --sidebar-ring: oklch(.708 0 0);
+  --primary-blue: #3d5afe;
+  --highlight-yellow: #fff8b5;
+  --highlight-yellow-hover: #fef08a;
+  --danger-red: #d32f2f;
+  --distortion-high: #dc2626;
+  --distortion-medium: #ea580c;
+  --normal: #2563eb;
+  --similarity-high: #16a34a;
+  --similarity-medium: #2563eb;
+  --similarity-low: #ea580c;
 }
 
 .dark {
