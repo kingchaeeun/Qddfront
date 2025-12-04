@@ -113,23 +113,6 @@ export function ExtensionPanel({
 
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto px-6 py-6 relative">
-        {/* Navigation Arrows */}
-        <button 
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 hover:bg-white/90 bg-white/70 rounded-full shadow-md transition-all disabled:opacity-30 disabled:cursor-not-allowed" 
-          onClick={handlePrevQuote}
-          disabled={currentQuoteIndex === 0}
-        >
-          <ChevronLeft className="w-5 h-5 text-gray-700" />
-        </button>
-        
-        <button 
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 hover:bg-white/90 bg-white/70 rounded-full shadow-md transition-all disabled:opacity-30 disabled:cursor-not-allowed" 
-          onClick={handleNextQuote}
-          disabled={currentQuoteIndex === detectedQuotes.length - 1}
-        >
-          <ChevronRight className="w-5 h-5 text-gray-700" />
-        </button>
-
         {/* Current Detected Quote with Sources */}
         <div className="space-y-6">
           <section>
@@ -137,12 +120,47 @@ export function ExtensionPanel({
               Detected Quote
               <sup className="text-[10px] text-black ml-0.5">{currentQuoteIndex + 1}</sup>
             </h2>
-            <QuoteHeaderCard
-              quoteId={currentQuote.id}
-              quoteText={currentQuote.text}
-              speaker={currentQuote.speaker}
-              isDistorted={isDistorted}
-            />
+            
+            {/* Quote Navigation Container */}
+            <div className="flex items-center gap-3">
+              {/* Previous Quote Button */}
+              <button
+                onClick={handlePrevQuote}
+                disabled={currentQuoteIndex === 0}
+                className={`p-2 rounded-lg transition-all flex-shrink-0 ${
+                  currentQuoteIndex === 0
+                    ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                aria-label="Previous quote"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Quote Card */}
+              <div className="flex-1">
+                <QuoteHeaderCard
+                  quoteId={currentQuote.id}
+                  quoteText={currentQuote.text}
+                  speaker={currentQuote.speaker}
+                  isDistorted={isDistorted}
+                />
+              </div>
+
+              {/* Next Quote Button */}
+              <button
+                onClick={handleNextQuote}
+                disabled={currentQuoteIndex === detectedQuotes.length - 1}
+                className={`p-2 rounded-lg transition-all flex-shrink-0 ${
+                  currentQuoteIndex === detectedQuotes.length - 1
+                    ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                aria-label="Next quote"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </section>
 
           <section>

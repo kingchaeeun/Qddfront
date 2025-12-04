@@ -65,29 +65,38 @@ export function CandidateCarousel({ sources, onViewSource }: CandidateCarouselPr
   return (
     <div className="space-y-4">
       {/* Carousel Header */}
-      <div className="flex items-center justify-between px-2">
-        <h3 className="text-gray-700">
-          후보 원문 소스 ({currentIndex + 1}/{sources.length})
+      <div className="px-2">
+        <h3 className="text-gray-700 mb-3">
+          후보 원문 소스 ({sources.length})
         </h3>
-        <div className="flex gap-2">
+        
+        {/* Navigation: Arrows + Pagination Dots */}
+        <div className="flex items-center justify-between gap-4">
           <button
             onClick={handlePrevious}
             disabled={currentIndex === 0}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-2 rounded-lg transition-all ${
               currentIndex === 0
-                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
             aria-label="Previous source"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
+
+          <PaginationDots
+            total={sources.length}
+            activeIndex={currentIndex}
+            onDotClick={handleDotClick}
+          />
+
           <button
             onClick={handleNext}
             disabled={currentIndex === sources.length - 1}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-2 rounded-lg transition-all ${
               currentIndex === sources.length - 1
-                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
             aria-label="Next source"
@@ -97,8 +106,8 @@ export function CandidateCarousel({ sources, onViewSource }: CandidateCarouselPr
         </div>
       </div>
 
-      {/* Carousel Content */}
-      <div className="relative overflow-hidden">
+      {/* Card Content */}
+      <div>
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentIndex}
@@ -119,13 +128,6 @@ export function CandidateCarousel({ sources, onViewSource }: CandidateCarouselPr
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* Pagination Dots */}
-      <PaginationDots
-        total={sources.length}
-        activeIndex={currentIndex}
-        onDotClick={handleDotClick}
-      />
     </div>
   );
 }

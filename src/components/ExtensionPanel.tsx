@@ -72,36 +72,44 @@ export function ExtensionPanel({
 
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto px-6 py-6 relative">
-        {/* Navigation Arrows */}
-        <button 
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 hover:bg-white/90 bg-white/70 rounded-full shadow-md transition-all disabled:opacity-30 disabled:cursor-not-allowed" 
-          onClick={handlePrevQuote}
-          disabled={currentQuoteIndex === 0}
-        >
-          <ChevronLeft className="w-5 h-5 text-gray-700" />
-        </button>
-        
-        <button 
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 hover:bg-white/90 bg-white/70 rounded-full shadow-md transition-all disabled:opacity-30 disabled:cursor-not-allowed" 
-          onClick={handleNextQuote}
-          disabled={currentQuoteIndex === detectedQuotes.length - 1}
-        >
-          <ChevronRight className="w-5 h-5 text-gray-700" />
-        </button>
-
         {/* Current Detected Quote with Sources */}
         <div>
           <section>
-            <h2 className="mb-4 text-gray-700 flex items-center gap-2">
-              Detected Quote
-              <sup className="text-[10px] text-black ml-0.5">{currentQuoteIndex + 1}</sup>
-            </h2>
-            <QuoteCard quote={detectedQuotes[currentQuoteIndex]} />
+            {/* Quote Navigation with Title */}
+            <div className="flex items-center justify-center gap-3 mb-4">
+              {/* Previous Quote Button - Rectangle */}
+              <button 
+                className="px-2 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0" 
+                onClick={handlePrevQuote}
+                disabled={currentQuoteIndex === 0}
+                aria-label="Previous quote"
+              >
+                <ChevronLeft className="w-5 h-5 text-gray-700" />
+              </button>
+              
+              {/* Title */}
+              <h2 className="flex items-center gap-2">
+                Detected Quote
+                <sup className="text-black ml-0.5">{currentQuoteIndex + 1}</sup>
+              </h2>
+              
+              {/* Next Quote Button - Rectangle */}
+              <button 
+                className="px-2 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0" 
+                onClick={handleNextQuote}
+                disabled={currentQuoteIndex === detectedQuotes.length - 1}
+                aria-label="Next quote"
+              >
+                <ChevronRight className="w-5 h-5 text-gray-700" />
+              </button>
+            </div>
+            
+            {/* Quote Card (currently hidden) */}
+            <div className="hidden">
+              <QuoteCard quote={detectedQuotes[currentQuoteIndex]} />
+            </div>
             
             <div className="mt-4">
-              <h3 className="mb-3 text-gray-700">
-                Recommended Sources ({detectedQuotes[currentQuoteIndex].sources.length})
-              </h3>
               <SourceCarousel sources={detectedQuotes[currentQuoteIndex].sources} onViewSource={onViewSource} />
             </div>
           </section>
